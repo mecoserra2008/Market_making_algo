@@ -1,5 +1,6 @@
 pub mod bybit;
 pub mod deribit;
+pub mod order_manager;
 
 use async_trait::async_trait;
 use anyhow::Result;
