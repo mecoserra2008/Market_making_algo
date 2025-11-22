@@ -2,6 +2,7 @@ use anyhow::Result;
 use tracing::{info, error};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
+mod api;
 mod config;
 mod exchanges;
 mod models;
