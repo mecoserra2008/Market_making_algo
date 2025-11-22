@@ -1,0 +1,90 @@
+[package]
+name = "bybit-market-maker"
+version = "0.1.0"
+edition = "2021"
+authors = ["Market Making Team"]
+description = "State-of-the-art market making algorithm for Bybit with Deribit options hedging"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+tokio-tungstenite = { version = "0.21", features = ["native-tls"] }
+futures = "0.3"
+async-trait = "0.1"
+
+# HTTP client
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+hyper = { version = "1.0", features = ["full"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_urlencoded = "0.7"
+
+# Cryptography (for API authentication)
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+base64 = "0.21"
+
+# Numerical computing
+ndarray = "0.15"
+ndarray-stats = "0.5"
+statrs = "0.16"
+ordered-float = { version = "4.2", features = ["serde"] }
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+tracing-appender = "0.2"
+
+# Configuration
+config = "0.14"
+toml = "0.8"
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Data structures
+dashmap = "5.5"
+parking_lot = "0.12"
+crossbeam = "0.8"
+
+# Metrics and monitoring
+prometheus = "0.13"
+
+# Rate limiting
+governor = "0.6"
+
+# UUID generation
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+# Environment variables
+dotenv = "0.15"
+
+# WebSocket
+tungstenite = "0.21"
+url = "2.5"
+
+[dev-dependencies]
+criterion = "0.5"
+mockito = "1.2"
+tokio-test = "0.4"
+
+[[bin]]
+name = "market-maker"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+
+[profile.dev]
+opt-level = 0
+debug = true
