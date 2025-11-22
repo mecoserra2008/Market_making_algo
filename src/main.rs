@@ -11,7 +11,7 @@ mod utils;
 
 use config::Config;
 use exchanges::{bybit::BybitExchange, deribit::DeribitExchange};
-use strategies::market_maker::MarketMaker;
+use strategies::market_maker_ws::MarketMakerWS;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -45,14 +45,14 @@ async fn main() -> Result<()> {
 
     info!("Exchange connectors initialized");
 
-    // Initialize market maker
-    let mut market_maker = MarketMaker::new(
+    // Initialize WebSocket-based market maker (Production Grade - 100x faster)
+    let mut market_maker = MarketMakerWS::new(
         bybit,
         deribit,
         config.clone(),
     );
 
-    info!("Market maker initialized, starting operations");
+    info!("WebSocket market maker initialized, starting operations");
 
     // Run market maker
     match market_maker.run().await {

@@ -1,4 +1,5 @@
 pub mod circuit_breaker;
+pub mod latency_monitor;
 
 use std::time::{SystemTime, UNIX_EPOCH};
 
